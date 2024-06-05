@@ -1,0 +1,23 @@
+name: Reusable install and build
+on:
+  workflow_call:
+
+jobs:
+  install-and-build:
+    runs-on: ubuntu-latest
+    name: Install and Build
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use pnpm from package.json
+        uses: pnpm/action-setup@v4
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        id: node
+        with:
+          node-version: 20
+          registry-url: https://npm.pkg.github.com/
+          cache: "pnpm"
+      - name: Install Dependency
+        run: pnpm install --frozen-lockfile
+      - name: Build
+        run: pnpm build

@@ -1,0 +1,12 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  install-and-build:
+    name: Install and Build
+    uses: "./.github/workflows/reusable-build.yml"
+    secrets: inherit
